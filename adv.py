@@ -1,37 +1,34 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+    'Garden':  Room("Garden Gate",
+                     """You stand in a small garden. To the south lies a large iron fence with a beautifully adorned gate. The path you are on leads north to a cottage"""),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+    'Cottage':  Room("Cute Cottage", """The cottage is one large room with a cot, a chest, and a comfortable looking kitchen nook"""),
 
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
-into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+    'Clearing': Room("Mushroom Valley", """A vast miles-long valley lays before you. Right at your feet you see a circle of mushrooms large enough to stand in"""),
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+    'Beach':   Room("Beautiful Beach", """You walk along the beach and smell salt in the air. A small garden shed sits locked."""),
 
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+    'Forest': Room("Deep Dark Forest", """The air is murky here and its too dark to see a path, you must go back"""),
 }
 
 
 # Link rooms together
+#idea, could these be set to a function and randomized? Could it be possible to create 'rare' rooms and 'frequent' ones but make it so that there is no way to predict which room you will be in next no matter what direction you go?
+#Another idea: Perhaps creating a weighted function that counts the number of times you go a specific direction,(perhaps an attribute of player) maybe call the 'directions' you go 'moralities' and then that decides which room you enter.... 
 
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
+room['Garden'].n_to = room['Cottage']
+room['Garden'].s_to = room['Clearing']
+room['Garden'].w_to = room['Beach']
+room['Garden'].e_to = room['Forest']
+room['Cottage'].s_to = room['Garden']
+room['Beach'].e_to = room['Garden']
+room['Forest'].w_to = room['Garden']
+room['Clearing'].n_to = room['Garden']
 
 #
 # Main
