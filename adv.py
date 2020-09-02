@@ -31,13 +31,36 @@ room['Forest'].w_to = room['Garden']
 room['Clearing'].n_to = room['Garden']
 
 #
-# Main
 #
 
-# Make a new player object that is currently in the 'outside' room.
+# Make a new player object that is currently in the 'outside' room. 
+print("Welcome to Garden House! The most normal place in the world. Nothing ever happens here-- making it a fantastic spot for quiet contemplation and gardening.")
+x = input("I'm Zabkadabka. Whats your name? ")
+
+lostchild= Player(x,room['Garden']);
+
+print(f'Nice to mee you {x}!')
+
+#x = input("Which way would you like to go? n, s, w, e : ")
 
 # Write a loop that:
-#
+codeword='play on'
+while codeword != 'q':
+    print(f'You are currently at the {lostchild.current_room.name}')
+    print(lostchild.current_room.description)
+    codeword = input("Which way would you like to go? n, s, w, e : ")
+    if codeword == 'n':
+        if lostchild.current_room.n_to != 'null':
+            lostchild.current_room=lostchild.current_room.n_to
+        else:
+           print("There is no path that direction");
+    elif codeword == 's':
+        if lostchild.current_room.s_to != 'null':
+            lostchild.current_room=lostchild.current_room.s_to;
+        else:
+           print("There is no path that direction");
+
+print("Thanks for playing!")
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
