@@ -13,7 +13,12 @@ room = {
 
     'Beach':   Room("Beautiful Beach", """You walk along the beach and smell salt in the air. A small garden shed sits locked."""),
 
-    'Forest': Room("Deep Dark Forest", """The air is murky here and its too dark to see a path, you must go back"""),
+    'Forest': Room("Deep Dark Forest", """The air is murky here and its too dark to see a path, you should go back"""),
+
+    'Forest2': Room("Deeper Darker Forest","""It has now gotten too hard for you to see and the air has gotten colder. You feel around in the branches and grab hold of a tree. Go back before it is too late"""),
+
+    'Forest3': Room("Deepest Darkest Forest","""You have been eaten by wolves.""")
+
 }
 
 
@@ -28,7 +33,11 @@ room['Garden'].e_to = room['Forest']
 room['Cottage'].s_to = room['Garden']
 room['Beach'].e_to = room['Garden']
 room['Forest'].w_to = room['Garden']
+room['Forest'].e_to = room['Forest2']
+room['Forest2'].w_to = room['Forest']
+room['Forest2'].e_to = room['Forest3']
 room['Clearing'].n_to = room['Garden']
+
 
 #
 #
@@ -39,7 +48,7 @@ x = input("I'm Zabkadabka. Whats your name? ")
 
 lostchild= Player(x,room['Garden']);
 
-print(f'Nice to mee you {x}!')
+print(f'Nice to mee you {x}! Remember the aim is to Garden ')
 
 #x = input("Which way would you like to go? n, s, w, e : ")
 
@@ -50,15 +59,32 @@ while codeword != 'q':
     print(lostchild.current_room.description)
     codeword = input("Which way would you like to go? n, s, w, e : ")
     if codeword == 'n':
-        if lostchild.current_room.n_to != 'null':
-            lostchild.current_room=lostchild.current_room.n_to
+        if lostchild.current_room.n_to != 'null' :
+            lostchild.current_room=lostchild.current_room.n_to;
         else:
-           print("There is no path that direction");
+            print("~There is no Path in that direction~");
     elif codeword == 's':
         if lostchild.current_room.s_to != 'null':
             lostchild.current_room=lostchild.current_room.s_to;
         else:
-           print("There is no path that direction");
+            print("~There is no Path in that direction~");
+    elif codeword == 'e':
+        if lostchild.current_room.e_to != 'null':
+            lostchild.current_room=lostchild.current_room.e_to;
+        else:
+            print("~There is no Path in that direction~");
+    elif codeword == 'w':
+        if lostchild.current_room.w_to != 'null':
+            lostchild.current_room=lostchild.current_room.w_to;
+        else:
+            print("~There is no Path in that direction~");
+
+    else:
+        print("~That is an invalid input~");
+    if lostchild.current_room.name == "Deepest Darkest Forest":
+        print(lostchild.current_room.description)
+        codeword = 'q';
+        
 
 print("Thanks for playing!")
 # * Prints the current room name
